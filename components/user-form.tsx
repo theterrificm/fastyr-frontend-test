@@ -58,12 +58,6 @@ const formSchema = z.object({
 
 export function UserForm() {
 
-//   const [name, setName] = useState('');
-//   const [username, setUsername] = useState('');
-//   const [email, setEmail] = useState('');
-//   const [phone, setPhone] = useState('');
-//   const [website, setWebsite] = useState('');
-//   const [company, setCompany] = useState('');
 
   const [createUser, { data, loading, error }] = useMutation(CREATE_USER_MUTATION);
 
