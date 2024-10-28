@@ -1,12 +1,10 @@
 import {
     NavigationMenu,
     NavigationMenuContent,
-    NavigationMenuIndicator,
     NavigationMenuItem,
     NavigationMenuLink,
     NavigationMenuList,
     NavigationMenuTrigger,
-    NavigationMenuViewport,
   } from "@/components/ui/navigation-menu";
   import Link from "next/link";
   import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu"
@@ -28,13 +26,18 @@ const NavMenu = () => {
                     </Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                    <Link href="/users">
-                        <NavigationMenuTrigger >Users</NavigationMenuTrigger>
-                    </Link> 
+                    
+                    <NavigationMenuTrigger >Users</NavigationMenuTrigger>
+                    
                     <NavigationMenuContent>
-                        <Link href={"/create-users"} legacyBehavior passHref>
+                        <Link href="/users" legacyBehavior passHref>
                         <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Create Users
+                            Users
+                        </NavigationMenuLink>
+                        </Link>
+                        <Link href="/create-users" legacyBehavior passHref>
+                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                            Create A User
                         </NavigationMenuLink>
                         </Link>
                     </NavigationMenuContent>

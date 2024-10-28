@@ -29,7 +29,7 @@ export default function RootLayout({
       >
         <NavMenu />
         <ApolloProvider client={apolloClient}>
-          <main className="container px-5 mx-auto">
+          <main className="container px-20 py-5">
             {children}
 
           </main>
