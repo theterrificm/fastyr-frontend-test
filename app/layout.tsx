@@ -4,6 +4,8 @@ import apolloClient from "@/apollo-client";
 import NavMenu from "@/components/NavMenu";
 import localFont from "next/font/local";
 import "./globals.css";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { AppSidebar } from "@/components/app-sidebar"
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,13 +29,18 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NavMenu />
-        <ApolloProvider client={apolloClient}>
-          <main className="container px-20 py-5">
-            {children}
+        <SidebarProvider>
+          <ApolloProvider client={apolloClient}>
+            <AppSidebar />
+            {/* Sidebar button */}
+            <SidebarTrigger/>
+            <main className="container px-20">
+              <NavMenu />
+              {children}
+            </main>
+          </ApolloProvider>
 
-          </main>
-        </ApolloProvider>
+        </SidebarProvider>
       </body>
     </html>
   );

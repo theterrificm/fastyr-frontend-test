@@ -9,39 +9,18 @@ import {
   } from "@/components/ui/table";
 
   import { Button } from "@/components/ui/button"
+  import Link from "next/link";
   
   
 
-interface UserData {
-id: number;
-name: string;
-username: string;
-email: string;
-phone: string;
-website: string;
+
+
+interface HeaderItem {
+    name: string;
 }
 
- const tableHead = [{
-    name: "Id",
- },
- {
-    name: "Name",
- },
- {
-    name: "Username",
- },
- {
-    name: "Email",
- },
- {
-    name: "Phone",
- },
- {
-    name: "Website",
- },
-] 
 
-const UsersTable = ({data}: {data: UserData[]}) => {
+const UsersTable = ({header  ,data}: { header:HeaderItem[] ,data: UserData[]}) => {
   return (
     <div>
         <div className="container flex justify-between text-center items-center">
@@ -53,7 +32,7 @@ const UsersTable = ({data}: {data: UserData[]}) => {
             <TableCaption>A list of all the users.</TableCaption>
             <TableHeader>
                 <TableRow>
-                    {tableHead.map((head) => (
+                    {header.map((head) => (
                         <TableHead key={head.name}>{head.name}</TableHead>
 
                     ))}
@@ -63,7 +42,7 @@ const UsersTable = ({data}: {data: UserData[]}) => {
                 {data.map((user) => (
                     <TableRow key={user.id}>
                         <TableCell className="font-medium">{user.id}</TableCell>
-                        <TableCell>{user.name}</TableCell>
+                        <TableCell><Link href={`/users/${user.id}`}> {user.name}</Link></TableCell>
                         <TableCell>{user.username}</TableCell>
                         <TableCell >{user.email}</TableCell>
                         <TableCell >{user.phone}</TableCell>

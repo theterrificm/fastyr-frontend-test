@@ -10,6 +10,8 @@ import {
     CardTitle,
   } from "@/components/ui/card"
 import { SkeletonCard } from '@/components/Skeleton';
+import { Button } from "@/components/ui/button"
+
 
 const GET_USER_DETAILS = gql`
     query GetUserDetails($id: ID!) {
@@ -41,14 +43,20 @@ const UserDetail = () => {
             <div className='col-start-2 col-span-4 text-center'>
                 <Card>
                     <CardHeader>
-                        <CardTitle>{data.user.name}</CardTitle>
-                        <CardDescription>{data.user.username}</CardDescription>
+                        <CardTitle className='text-2xl'>{data.user.name}</CardTitle>
+                        <CardDescription>Username: {data.user.username}</CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <p>Card Content</p>
+                        <b>Email:</b>
+                        <p className='mb-3'> {data.user.email}</p>
+                        <b>Phone:</b>
+                        <p className='mb-3'> {data.user.phone}</p>
+                        <b>Website:</b>
+                        <p className='mb-3'>{data.user.website}</p>
                     </CardContent>
-                    <CardFooter>
-                        <p>{data.user.website}</p>
+                    <CardFooter className='flex justify-center gap-4'>
+                        <Button variant="destructive">Delete</Button>
+                        <Button variant="secondary">Edit</Button>
                     </CardFooter>
                 </Card>
 
