@@ -1,3 +1,24 @@
+
+# Links
+
+- /users (Get all users and add a user)
+- /users/id (User detail - Click on any user from the previous page) + (edit/delete user)
+- /albums (Get all albums)
+- /albums/id (Get Album details)
+- /albums/import (Import xlsx/csv to albums data)
+
+# Features
+
+✅ Search and filter by columns
+
+✅ Search and filter by columns
+
+✅ Pagination
+
+✅ Importing albums from a CSV/XLSX file
+
+#
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
