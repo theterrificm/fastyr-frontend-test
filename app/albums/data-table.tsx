@@ -35,7 +35,7 @@ const DELETE_USER_MUTATION = gql`
   }
 `
 
-interface DataTableProps<TData, TValue> {
+interface DataTableProps<TData extends { id: string | number }, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
 }
