@@ -1,5 +1,6 @@
 "use client";
 import { useState } from 'react';
+import { ChangeEvent } from 'react';
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import * as XLSX from 'xlsx';
@@ -13,8 +14,8 @@ function FileInput() {
   const [dataImport, setDataImport] = useState(null);
   const { toast } = useToast();
 
-  const handleFileUpload = (e) => {
-    const file = e.target.files[0];
+  const handleFileUpload = (e:  ChangeEvent<HTMLInputElement>) => {
+    const file = e.target?.files?.[0];
     const reader = new FileReader();
 
     reader.onload = (event) => {
@@ -30,13 +31,13 @@ function FileInput() {
     reader.readAsBinaryString(file);
   };
 
-  const handleInputChange = (e, index, field) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newData = [...dataImport];
     newData[index][field] = e.target.value;
     setDataImport(newData);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
 
     try {

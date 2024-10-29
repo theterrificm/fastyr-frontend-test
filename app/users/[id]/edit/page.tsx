@@ -12,7 +12,7 @@ const EditUser = () => {
     const { loading, error, data } = useQuery(GET_USER_DETAILS, {
         variables: { id },
     });
-    const [updateUser, { loadingUpdate }] = useMutation(UPDATE_USER);
+    const [updateUser] = useMutation(UPDATE_USER);
     const { toast } = useToast()
 
     const [user, setUser] = useState({
@@ -35,7 +35,7 @@ const EditUser = () => {
         }
     }, [data]);
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { id, value } = e.target;
         setUser((prevState) => ({
             ...prevState,
@@ -43,7 +43,7 @@ const EditUser = () => {
         }));
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
         
         try {
@@ -107,8 +107,8 @@ const EditUser = () => {
                         className="border border-gray-300 rounded-md px-3 py-2"
                     />
                 </div>
-                <Button disabled={loading || loadingUpdate}>
-                    {loadingUpdate ? "Updating..." : "Update"}
+                <Button >
+                    Update
                 </Button>
 
             </form>
