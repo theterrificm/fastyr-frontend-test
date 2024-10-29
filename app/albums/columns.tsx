@@ -52,10 +52,7 @@ export const columns: ColumnDef<AlbumsColumns>[] = [
       )
     },
   },
-  {
-    accessorKey: "name",
-    header: "Name"
-  },
+
   
 ]
 
