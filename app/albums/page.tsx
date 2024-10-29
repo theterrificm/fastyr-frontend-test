@@ -14,46 +14,13 @@ import {
     PaginationPrevious,
   } from "@/components/ui/pagination"
   import { Button } from "@/components/ui/button"
+  import { GET_ALBUMS } from "@/app/constants";
 
   
 
 
 
-const GET_ALBUMS = gql`
-    query GetAlbums($page: Int) {
-        albums (options: {
-            paginate: {
-                page: $page,
-                limit: 10
 
-            
-            }
-            
-        }) {
-            data{
-            id
-            title
-            
-            
-            
-            }
-            links{
-            first{
-                page
-                limit
-            }
-            next{
-                page
-                limit
-            }
-            last{
-                page
-                limit
-            } 
-            }
-        }   
-    }
- `;
 
 
 

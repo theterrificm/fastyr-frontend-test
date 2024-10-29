@@ -1,5 +1,5 @@
 "use client";
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { useParams } from 'next/navigation'
 import {
     Card,
@@ -11,20 +11,8 @@ import {
   } from "@/components/ui/card"
 import { SkeletonCard } from '@/components/Skeleton';
 import { Button } from "@/components/ui/button"
+import { GET_USER_DETAILS } from '@/app/constants';
 
-
-const GET_USER_DETAILS = gql`
-    query GetUserDetails($id: ID!) {
-        user(id: $id) {
-            id
-            name
-            username
-            email
-            phone
-            website
-        }
-    }
-`;
 
 const UserDetail = () => {
 
@@ -39,7 +27,7 @@ const UserDetail = () => {
 
 
     return (
-        <div className='grid grid-cols-6 gap-4'>
+        <div className='grid grid-cols-6 gap-4 py-5'>
             <div className='col-start-2 col-span-4 text-center'>
                 <Card>
                     <CardHeader>

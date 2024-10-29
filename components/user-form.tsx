@@ -15,23 +15,8 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { useState } from 'react';
-import { useMutation, gql } from '@apollo/client';
-
-
-const CREATE_USER_MUTATION = gql`
-    mutation CreateUser($input: CreateUserInput!) {
-        createUser(input: $input) {
-            id
-            name
-            username
-            email
-            phone
-            website
-            
-        }
-    }
-`;
-
+import { useMutation } from '@apollo/client';
+import { CREATE_USER_MUTATION } from "@/app/constants"
 
 
 const formSchema = z.object({

@@ -15,7 +15,7 @@ import {
 
 const NavMenu = () => {
   return (
-    <div className="container mx-auto gap-4 bg-slate-50 p-4 flex justify-center shadow-sm">
+    <div className="container mx-auto gap-4 bg-transparent p-4 flex justify-center shadow-sm">
         <NavigationMenu >
             <NavigationMenuList>
                 <NavigationMenuItem>
@@ -35,11 +35,11 @@ const NavMenu = () => {
                             Users
                         </NavigationMenuLink>
                         </Link>
-                        <Link href="/create-users" legacyBehavior passHref>
+                        {/* <Link href="/create-users" legacyBehavior passHref>
                         <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                             Create A User
                         </NavigationMenuLink>
-                        </Link>
+                        </Link> */}
                     </NavigationMenuContent>
                 </NavigationMenuItem>
 
