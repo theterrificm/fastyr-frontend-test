@@ -9,7 +9,7 @@ import { CREATE_ALBUM } from "@/app/constants";
 import { useToast } from "@/hooks/use-toast";
 
 function FileInput() {
-  const [createAlbum, { loading, error }] = useMutation(CREATE_ALBUM);
+  const [createAlbum, { loading }] = useMutation(CREATE_ALBUM);
   const [dataImport, setDataImport] = useState(null);
   const { toast } = useToast();
 

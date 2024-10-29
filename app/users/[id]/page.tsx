@@ -26,7 +26,7 @@ const UserDetail = () => {
     const { loading, error, data } = useQuery(GET_USER_DETAILS, {
     variables: { id },
     })
-    const [deleteUser, { dataDel, loadingDel, errorDel }] = useMutation(DELETE_USER);
+    const [deleteUser, { loadingDel }] = useMutation(DELETE_USER);
     
 
     if (loading) return <SkeletonCard />;

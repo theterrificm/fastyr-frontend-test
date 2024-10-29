@@ -8,8 +8,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { UserForm } from "@/components/user-form"
 
 export function AddUser() {
@@ -22,7 +20,7 @@ export function AddUser() {
         <DialogHeader>
           <DialogTitle>Create a new user</DialogTitle>
           <DialogDescription>
-            Create a user here. Click submit when you're done.
+            Create a user here. Click submit when you are done.
           </DialogDescription>
         </DialogHeader>
         

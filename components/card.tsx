@@ -2,12 +2,9 @@ import {
     Card,
     CardContent,
     CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
   } from "@/components/ui/card"
-//   import { Pencil2Icon, TrashIcon } from "@radix-ui/react-icons"
-//   import { Button } from "./ui/button";
 import Link from "next/link";
   interface UserData {
     id: number;
@@ -39,11 +36,11 @@ const Cards = ({data}: { data: UserData[]}) => {
                         <b>Phone:</b>
                         <p>{user.phone}</p>
                         <b>Address:</b>
-                        <p>{user.address.street}, {user.address.suite}, {user.address.city}, {user.address.zipcode}</p>
+                        <p>{user?.address.street}, {user?.address.suite}, {user?.address.city}, {user?.address.zipcode}</p>
                         <b>Company:</b>
-                        <p>{user.company.name}</p>
+                        <p>{user?.company.name}</p>
                         <b>Website:</b>
-                        <p>{user.website}</p>
+                        <p>{user?.website}</p>
 
 
                     </CardContent>

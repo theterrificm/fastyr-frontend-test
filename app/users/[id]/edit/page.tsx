@@ -12,7 +12,7 @@ const EditUser = () => {
     const { loading, error, data } = useQuery(GET_USER_DETAILS, {
         variables: { id },
     });
-    const [updateUser, { updateData, loadingUpdate, errorUpdate }] = useMutation(UPDATE_USER);
+    const [updateUser, { loadingUpdate }] = useMutation(UPDATE_USER);
     const { toast } = useToast()
 
     const [user, setUser] = useState({

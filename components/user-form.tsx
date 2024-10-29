@@ -14,7 +14,6 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { CREATE_USER_MUTATION } from "@/app/constants"
 
@@ -87,6 +86,7 @@ export function UserForm() {
     };
   
     if(loading) return <p>Loading...</p>;
+    if(error) return <p>Error : {error.message}</p>;
        
     return(
         <div>
