@@ -26,35 +26,35 @@ import { Input } from "@/components/ui/input"
 import { useMutation, gql } from '@apollo/client'
 import { useToast } from "@/hooks/use-toast"
 
-
-
-
 const DELETE_USER_MUTATION = gql`
   mutation deleteUser($id: ID!) {
     deleteUser(id: $id)
   }
 `
 
-interface DataTableProps<TData extends { id: string | number }, TValue> {
-  columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+// Define User interface with an id property
+interface User {
+  id: string | number
+  name: string
+  email: string
 }
 
-export function DataTable<TData, TValue>({
+// Define props with the User type
+interface DataTableProps<TValue> {
+  columns: ColumnDef<User, TValue>[]
+  data: User[]
+}
+
+export function DataTable<TValue>({
   columns,
   data,
-}: DataTableProps<TData, TValue>) {
-  // State for sorting, filtering, column visibility, and row selection
+}: DataTableProps<TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  )
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({})
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
+  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
-  const [loading, setLoading] = React.useState(false) // State to handle loading state for delete button
- 
-  // Setting up the table with react-table hooks
+  const [loading, setLoading] = React.useState(false)
+
   const table = useReactTable({
     data,
     columns,
@@ -77,19 +77,17 @@ export function DataTable<TData, TValue>({
 
   const [deleteUser] = useMutation(DELETE_USER_MUTATION)
 
-  // Function to handle bulk delete of selected rows
   const handleBulkDelete = async () => {
     const selectedRows = table.getFilteredSelectedRowModel().rows
     if (selectedRows.length === 0) return
 
-    setLoading(true) // Set loading to true before starting the delete process
+    setLoading(true)
     try {
       await Promise.all(
         selectedRows.map((row) =>
           deleteUser({ variables: { id: row.original.id } })
         )
       )
-      // Optionally, refetch data or update the state after deletion
       toast({
         title: "Successful.",
         description: `${table.getFilteredSelectedRowModel().rows.length} users deleted successfully.`,
@@ -99,23 +97,21 @@ export function DataTable<TData, TValue>({
     } catch (error) {
       console.error('Error deleting users:', error)
     } finally {
-      setLoading(false) // Set loading to false after the delete process is complete
+      setLoading(false)
     }
   }
 
   return (
     <div>
-      {/* Filter input for filtering table rows */}
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter titles..."
-          value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
+          placeholder="Filter names..."
+          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("title")?.setFilterValue(event.target.value)
+            table.getColumn("name")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
-        {/* Delete button with loading state */}
         <Button
           variant="destructive"
           className="ml-5"
@@ -125,24 +121,21 @@ export function DataTable<TData, TValue>({
           {loading ? "Deleting..." : "Delete"}
         </Button>
       </div>
-      {/* Table component to display data */}
       <div className="rounded-md border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  )
-                })}
+                {headerGroup.headers.map((header) => (
+                  <TableHead key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                  </TableHead>
+                ))}
               </TableRow>
             ))}
           </TableHeader>
@@ -152,7 +145,7 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                > 
+                >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -170,9 +163,7 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      {/* Displaying the count of selected rows */}
       <div className="flex-1 text-sm text-muted-foreground">
-        {console.log(table.getFilteredSelectedRowModel().rows)}
         {table.getFilteredSelectedRowModel().rows.length} of{" "}
         {table.getFilteredRowModel().rows.length} row(s) selected.
       </div>
