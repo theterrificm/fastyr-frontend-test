@@ -12,7 +12,9 @@ import {
     PaginationNext,
     PaginationPrevious,
   } from "@/components/ui/pagination"
-  import { GET_ALBUMS } from "@/app/constants";
+import { GET_ALBUMS } from "@/app/constants";
+import { SkeletonCard } from '@/components/Skeleton';
+
 
 
 const Albums =  () => {
@@ -21,7 +23,7 @@ const Albums =  () => {
         variables: { page },
     }); 
 
-    if (loading) return <p>Loading...</p>;
+    if (loading) return <div className="pt-5"><SkeletonCard/></div>;
   
     if (error) return <p>Error : {error.message}</p>;
     

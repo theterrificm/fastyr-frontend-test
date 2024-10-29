@@ -1,6 +1,5 @@
 "use client";
 import { useState } from 'react';
-import { ChangeEvent } from 'react';
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import * as XLSX from 'xlsx';
@@ -14,7 +13,7 @@ function FileInput() {
   const [dataImport, setDataImport] = useState(null);
   const { toast } = useToast();
 
-  const handleFileUpload = (e:  ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = (e) => {
     const file = e.target?.files?.[0];
     const reader = new FileReader();
 
@@ -31,13 +30,13 @@ function FileInput() {
     reader.readAsBinaryString(file);
   };
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e, index, field) => {
     const newData = [...dataImport];
     newData[index][field] = e.target.value;
     setDataImport(newData);
   };
 
-  const handleSubmit = async (e: ChangeEvent<HTMLInputElement>) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
@@ -81,7 +80,7 @@ function FileInput() {
           <div className="py-5">
             <h2 className="text-xl font-bold">Uploaded Data:</h2>
             <form onSubmit={handleSubmit} className="space-y-3 py-4">
-              <div className="grid grid-cols-2 gap-4">
+              
                 <div>
                   <h2>User Id</h2>
                 </div>
@@ -90,22 +89,22 @@ function FileInput() {
                 </div>
                 {dataImport &&
                   dataImport.map((item, index) => (
-                    <>
-                      <div key={item.id}>
+                    <div className="grid grid-cols-2 gap-4"  key={index}>
+                      <div>
                         <Input
                           value={item.id}
                           onChange={(e) => handleInputChange(e, index, 'id')}
                         />
                       </div>
-                      <div key={item.title}>
+                      <div>
                         <Input
                           value={item.title}
                           onChange={(e) => handleInputChange(e, index, 'title')}
                         />
                       </div>
-                    </>
+                    </div>
                   ))}
-              </div>
+              
               <Button disabled={loading} type="submit">
                 {loading ? "Loading..." : "Submit"}
               </Button>
