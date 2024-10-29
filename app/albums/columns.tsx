@@ -10,6 +10,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 export type AlbumsColumns = {
   id: string | number; 
   title: string;
+  name: string
 }
 
 export const columns: ColumnDef<AlbumsColumns>[] = [
