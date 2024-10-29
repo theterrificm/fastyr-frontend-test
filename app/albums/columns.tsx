@@ -8,19 +8,15 @@ import { Checkbox } from "@/components/ui/checkbox"
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type AlbumsColumns = {
-
-  title: string,
+  id: string | number; 
+  title: string;
 }
 
 export const columns: ColumnDef<AlbumsColumns>[] = [
 
-  // {
-  //   accessorKey: "select",
-  //   header: () => <Checkbox name="bulk" value={"bulkDelete"} />,
-  //   cell: ({row}) => <Checkbox value={row.original.id} />,
-  // },
+
   {
-    id: "select",
+    accessorKey: "select",
     header: ({ table }) => (
       <Checkbox
         checked={
@@ -54,6 +50,10 @@ export const columns: ColumnDef<AlbumsColumns>[] = [
         </Button>
       )
     },
+  },
+  {
+    accessorKey: "name",
+    header: "Name"
   },
   
 ]

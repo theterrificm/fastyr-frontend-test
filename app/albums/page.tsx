@@ -21,11 +21,6 @@ const Albums =  () => {
         variables: { page },
     }); 
 
-    // const nextPage = () => {
-    //     setPage(page + 1);
-    // }
-
-
     if (loading) return <p>Loading...</p>;
   
     if (error) return <p>Error : {error.message}</p>;

@@ -32,23 +32,28 @@ const DELETE_USER_MUTATION = gql`
   }
 `
 
-// Define User interface with an id property
-interface User {
+// interface User {
+//   id: string | number
+//   name: string
+//   email: string
+// }
+interface AlbumsColumns {
   id: string | number
+  title: string
   name: string
-  email: string
+ 
 }
 
 // Define props with the User type
-interface DataTableProps<TValue> {
-  columns: ColumnDef<User, TValue>[]
-  data: User[]
+interface DataTableProps {
+  columns: ColumnDef<AlbumsColumns, unknown>[]
+  data: AlbumsColumns[]
 }
 
-export function DataTable<TValue>({
+export function DataTable({
   columns,
   data,
-}: DataTableProps<TValue>) {
+}: DataTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
@@ -107,7 +112,7 @@ export function DataTable<TValue>({
         <Input
           placeholder="Filter names..."
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             table.getColumn("name")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"

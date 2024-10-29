@@ -26,7 +26,7 @@ const UserDetail = () => {
     const { loading, error, data } = useQuery(GET_USER_DETAILS, {
     variables: { id },
     })
-    const [deleteUser, { loadingDel }] = useMutation(DELETE_USER);
+    const [deleteUser] = useMutation(DELETE_USER);
     
 
     if (loading) return <SkeletonCard />;
@@ -68,7 +68,7 @@ const UserDetail = () => {
                         <p className='mb-3'>{data.user.website}</p>
                     </CardContent>
                     <CardFooter className='flex justify-center gap-4'>
-                        <Button disabled={loadingDel} variant="destructive" onClick={handleDelete}>{loadingDel ? "Deleting..." : "Delete"}</Button>
+                        <Button  variant="destructive" onClick={handleDelete}>Delete</Button>
                         <Link href={`/users/${id}/edit`}>
                             <Button variant="secondary">Edit</Button>
                         </Link>

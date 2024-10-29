@@ -13,6 +13,16 @@ import Link from "next/link";
     email: string;
     phone: string;
     website: string;
+    address: {
+      street: string;
+      suite: string;
+      city: string;
+      zipcode: string;
+    }
+    company: {
+      name: string;
+    }
+    
     }
 
 
@@ -36,7 +46,7 @@ const Cards = ({data}: { data: UserData[]}) => {
                         <b>Phone:</b>
                         <p>{user.phone}</p>
                         <b>Address:</b>
-                        <p>{user?.address.street}, {user?.address.suite}, {user?.address.city}, {user?.address.zipcode}</p>
+                        <p>{user?.address?.street}, {user?.address.suite}, {user?.address.city}, {user?.address.zipcode}</p>
                         <b>Company:</b>
                         <p>{user?.company.name}</p>
                         <b>Website:</b>
