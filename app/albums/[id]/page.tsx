@@ -2,7 +2,7 @@
 import { gql, useQuery } from '@apollo/client';
 import { useParams } from 'next/navigation'
 import Image from 'next/image';
-import { SkeletonCard } from '@/components/Skeleton';
+import { SkeletonCard } from '@/components/skeleton';
 
 
 const GET_ALBUM_DETAILS = gql`

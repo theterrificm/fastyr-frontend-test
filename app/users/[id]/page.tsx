@@ -1,7 +1,6 @@
 "use client";
-import { useQuery } from '@apollo/client';
-import { useMutation} from '@apollo/client';
-import { useParams } from 'next/navigation'
+import { useQuery, useMutation } from '@apollo/client';
+import { useParams, useRouter } from 'next/navigation';
 import {
     Card,
     CardContent,
@@ -9,76 +8,74 @@ import {
     CardFooter,
     CardHeader,
     CardTitle,
-  } from "@/components/ui/card"
-import { SkeletonCard } from '@/components/Skeleton';
-import { Button } from "@/components/ui/button"
-import { useToast } from "@/hooks/use-toast"
+} from "@/components/ui/card";
+import { SkeletonCard } from '@/components/skeleton';
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 import { DELETE_USER, GET_USER_DETAILS } from '@/app/constants';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
-
-const UserDetail = () => {
-
-    const {id} = useParams();
-    const { toast } = useToast()
-    const router = useRouter();
-    const { loading, error, data } = useQuery(GET_USER_DETAILS, {
+/**
+ * UserDetailPage component displays details of a user and provides options to edit or delete the user.
+ */
+const UserDetailPage = () => {
+  const { id } = useParams();
+  const { data, loading, error } = useQuery(GET_USER_DETAILS, {
     variables: { id },
-    })
-    const [deleteUser] = useMutation(DELETE_USER);
-    
+  });
+  const [deleteUserMutation] = useMutation(DELETE_USER);
+  const { toast } = useToast();
+  const router = useRouter();
 
-    if (loading) return <SkeletonCard />;
-    if (error) return <p>Error : {error.message}</p>;
+  // Render a loading state while fetching user details
+  if (loading) return <SkeletonCard />;
+  // Render an error message if fetching fails
+  if (error) return <p>Error: {error.message}</p>;
 
-    const handleDelete = async() => {
-        console.log("clicked");
-        await deleteUser({
-            variables: {
-              id: id
-            },
-          }).then(data => {
-            toast({
-                title: "Deleted",
-                description: "User Deleted Successfully",
-              })
-            router.push("/users")
-            console.log( data)
-        });
-        
-        
-    }
+  /**
+   * Handle the deletion of the user.
+   * Upon successful deletion, displays a toast notification and redirects to the users list.
+   */
+  const handleDelete = async () => {
+    await deleteUserMutation({
+      variables: { id },
+    }).then(() => {
+      toast({
+        title: "Deleted",
+        description: "User deleted successfully",
+      });
+      router.push("/users");
+    });
+  };
 
+  return (
+    <div className="grid md:grid-cols-12 lg:grid-cols-6 gap-4 py-5">
+      <div className="col-start-2 col-span-4 text-center">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-2xl">{data.user.name}</CardTitle>
+            <CardDescription>Username: {data.user.username}</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <b>Email:</b>
+            <p className="mb-3">{data.user.email}</p>
+            <b>Phone:</b>
+            <p className="mb-3">{data.user.phone}</p>
+            <b>Website:</b>
+            <p className="mb-3">{data.user.website}</p>
+          </CardContent>
+          <CardFooter className="flex justify-center gap-4">
+            <Button variant="destructive" onClick={handleDelete}>
+              Delete
+            </Button>
+            <Link href={`/users/${id}/edit`}>
+              <Button variant="secondary">Edit</Button>
+            </Link>
+          </CardFooter>
+        </Card>
+      </div>
+    </div>
+  );
+};
 
-    return (
-        <div className='grid md:grid-cols-12 lg:grid-cols-6 gap-4 py-5'>
-            <div className='col-start-2 col-span-4 text-center'>
-                <Card>
-                    <CardHeader>
-                        <CardTitle className='text-2xl'>{data.user.name}</CardTitle>
-                        <CardDescription>Username: {data.user.username}</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                        <b>Email:</b>
-                        <p className='mb-3'> {data.user.email}</p>
-                        <b>Phone:</b>
-                        <p className='mb-3'> {data.user.phone}</p>
-                        <b>Website:</b>
-                        <p className='mb-3'>{data.user.website}</p>
-                    </CardContent>
-                    <CardFooter className='flex justify-center gap-4'>
-                        <Button  variant="destructive" onClick={handleDelete}>Delete</Button>
-                        <Link href={`/users/${id}/edit`}>
-                            <Button variant="secondary">Edit</Button>
-                        </Link>
-                    </CardFooter>
-                </Card>
-
-            </div>
-
-        </div>
-  )
-}
-
-export default UserDetail
+export default UserDetailPage;

@@ -1,7 +1,7 @@
 "use client";
 import { ApolloProvider } from "@apollo/client";
 import apolloClient from "@/apollo-client";
-import NavMenu from "@/components/NavMenu";
+import NavMenu from "@/components/nav-menu";
 import localFont from "next/font/local";
 import "./globals.css";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"

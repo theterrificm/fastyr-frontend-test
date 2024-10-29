@@ -13,7 +13,7 @@ import {
     PaginationPrevious,
   } from "@/components/ui/pagination"
 import { GET_ALBUMS } from "@/app/constants";
-import { SkeletonCard } from '@/components/Skeleton';
+import { SkeletonCard } from '@/components/skeleton';
 
 
 
