@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowUpDown } from "lucide-react"
 import { ColumnDef } from "@tanstack/react-table"
 import { Checkbox } from "@/components/ui/checkbox"
+import { Badge } from "@/components/ui/badge"
 
 
 // This type is used to define the shape of our data.
@@ -14,16 +15,33 @@ export type AlbumsColumns = {
 
 export const columns: ColumnDef<AlbumsColumns>[] = [
 
-  {
-    //as soon as the select all states becomes true, all the checkbox will become true as well
-    accessorKey: "select",
-    header: () => <Checkbox name="bulk" value={"bulkDelete"} />,
-    cell: ({row}) => <Checkbox value={row.original.id} />,
-  },
   // {
-  //   accessorKey: "id",
-  //   header: "Id",
+  //   accessorKey: "select",
+  //   header: () => <Checkbox name="bulk" value={"bulkDelete"} />,
+  //   cell: ({row}) => <Checkbox value={row.original.id} />,
   // },
+  {
+    id: "select",
+    header: ({ table }) => (
+      <Checkbox
+        checked={
+          table.getIsAllPageRowsSelected() ||
+          (table.getIsSomePageRowsSelected() && "indeterminate")
+        }
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        aria-label="Select all"
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        aria-label="Select row"
+      />
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
   {
     accessorKey: "title",
     header: ({ column }) => {
@@ -41,4 +59,3 @@ export const columns: ColumnDef<AlbumsColumns>[] = [
   
 ]
 
-//for the bulk delete logic: on every checkbox click, we will push the ids and then delete altogether 
