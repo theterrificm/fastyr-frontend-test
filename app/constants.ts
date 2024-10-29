@@ -85,5 +85,17 @@ export const GET_ALBUMS = gql`
         }
  `;
 
+ export const CREATE_ALBUM = gql`
+    mutation CreateAlbum($input: CreateAlbumInput!) {
+        createAlbum(input: $input) {
+            id
+            title
+            user{
+            name
+            }
+        }
+    }
+`;
+
 
 
