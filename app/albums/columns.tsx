@@ -1,5 +1,5 @@
 "use client"
-
+import { useState } from "react"
 import { ColumnDef } from "@tanstack/react-table"
 import { Checkbox } from "@/components/ui/checkbox"
 
@@ -12,10 +12,12 @@ export type AlbumsColumns = {
 }
 
 export const columns: ColumnDef<AlbumsColumns>[] = [
+
   {
-    accessorKey: "bulk",
-    header: () => <Checkbox/>,
-    cell: ({row}) => <Checkbox id={row.original.id}/>,
+    //as soon as the select all states becomes true, all the checkbox will become true as well
+    accessorKey: "select",
+    header: () => <Checkbox name="bulk" value={"bulkDelete"} />,
+    cell: ({row}) => <Checkbox value={row.original.id} />,
   },
   {
     accessorKey: "id",
@@ -27,3 +29,5 @@ export const columns: ColumnDef<AlbumsColumns>[] = [
   },
   
 ]
+
+//for the bulk delete logic: on every checkbox click, we will push the ids and then delete altogether 

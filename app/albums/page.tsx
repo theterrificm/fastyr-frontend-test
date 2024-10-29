@@ -13,6 +13,8 @@ import {
     PaginationNext,
     PaginationPrevious,
   } from "@/components/ui/pagination"
+  import { Button } from "@/components/ui/button"
+
   
 
 
@@ -57,6 +59,7 @@ const GET_ALBUMS = gql`
 
 const Albums =  () => {
     const [page, setPage] = useState(1);
+    const [selectDelete, setSelectDelete] = useState(false);
     const { loading, error, data } = useQuery(GET_ALBUMS, {
         variables: { page },
     }); 
@@ -74,7 +77,12 @@ const Albums =  () => {
     return (
         <div className="container mx-auto py-10">
             {console.log(data)}
-        <DataTable columns={columns} data={data.albums.data} />
+        {selectDelete && (
+            <Button variant="destructive" className=" mb-3">Deleta All</Button>    
+        )}
+        
+        <DataTable  columns={columns} data={data.albums.data} />
+        
         <Pagination>
             <PaginationContent>
                 {page !== 1 && (
@@ -82,11 +90,11 @@ const Albums =  () => {
                         <PaginationPrevious  onClick={() => setPage(page - 1)}/>
                     </PaginationItem>
                 )}
-                    <Link onClick={() => setPage(1)} isActive={page === 1}  href="#">
-                        <PaginationItem >
-                            1
-                        </PaginationItem>
-                    </Link>
+                <Link onClick={() => setPage(1)}  href="#">
+                    <PaginationItem >
+                        1
+                    </PaginationItem>
+                </Link>
                 <PaginationItem>
                     <PaginationEllipsis />
                 </PaginationItem>
