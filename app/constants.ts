@@ -48,6 +48,20 @@ export const CREATE_USER_MUTATION = gql`
         }
     }
 `;
+export const UPDATE_USER = gql`
+    mutation UpdateUser($id: ID!, $input: UpdateUserInput!) {
+        updateUser(id: $id, input: $input) {
+            id
+            name
+            username
+            email
+            phone
+            website
+            
+        }
+    }
+`;
+
 export const DELETE_USER = gql`
     mutation DeleteUser($id: ID!) {
         deleteUser(id: $id) 

@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button"
 import { useToast } from "@/hooks/use-toast"
 import { DELETE_USER, GET_USER_DETAILS } from '@/app/constants';
 import { useRouter } from 'next/navigation';
-
+import Link from 'next/link';
 
 
 const UserDetail = () => {
@@ -69,7 +69,9 @@ const UserDetail = () => {
                     </CardContent>
                     <CardFooter className='flex justify-center gap-4'>
                         <Button disabled={loadingDel} variant="destructive" onClick={handleDelete}>{loadingDel ? "Deleting..." : "Delete"}</Button>
-                        <Button variant="secondary">Edit</Button>
+                        <Link href={`/users/${id}/edit`}>
+                            <Button variant="secondary">Edit</Button>
+                        </Link>
                     </CardFooter>
                 </Card>
 
