@@ -31,20 +31,18 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SidebarProvider>
-          <ApolloProvider client={apolloClient}>
+        <ApolloProvider client={apolloClient}>
+          <SidebarProvider>
             <AppSidebar />
-            {/* Sidebar button */}
+
             <SidebarTrigger/>
             <main className="container px-20">
               <NavMenu />
               {children}
             </main>
             <Toaster />
-
-          </ApolloProvider>
-
-        </SidebarProvider>
+          </SidebarProvider>
+        </ApolloProvider>
       </body>
     </html>
   );

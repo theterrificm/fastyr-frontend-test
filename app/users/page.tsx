@@ -1,6 +1,5 @@
 "use client";
 import { useQuery } from '@apollo/client';
-import UsersTable from '@/components/UsersTable'; //needs to remove
 import { SkeletonCard } from '@/components/Skeleton';
 import Cards from '@/components/card';
 import { AddUser } from '@/components/adduser';
@@ -20,8 +19,6 @@ const Users = () => {
       <div className="flex justify-end">
         <AddUser  />
       </div>
-      {/* need to remove */}
-      {/* <UsersTable header={tableHeader} data={data.users.data}/> */}
       <Cards data={data.users.data} />
     </div>
   ) 

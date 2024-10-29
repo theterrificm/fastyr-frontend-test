@@ -21,7 +21,8 @@ import Link from "next/link";
 
 const Cards = ({data}: { data: UserData[]}) => {
   return (
-    <div className="grid grid-cols-3 gap-6 py-5">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 py-5">
+    {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6 py-5"> */}
         {data.map((user) => (
             <Link key={user.id} href={`/users/${user.id}`}>
                 <Card >
@@ -29,9 +30,12 @@ const Cards = ({data}: { data: UserData[]}) => {
                         <CardTitle className="text-2xl">{user.name}</CardTitle>
                         <CardDescription>Username: {user.username}</CardDescription>
                     </CardHeader>
-                    <CardContent>
-                        <b>Email:</b>
-                        <p>{user.email}</p>
+                    <CardContent className="sm:p-6">
+                        <div>
+                          <b>Email:</b>
+                          <p className="truncate">{user.email}</p>
+
+                        </div>
                         <b>Phone:</b>
                         <p>{user.phone}</p>
                         <b>Address:</b>
@@ -43,13 +47,7 @@ const Cards = ({data}: { data: UserData[]}) => {
 
 
                     </CardContent>
-                    <CardFooter className=' gap-4'>
-                        <b>Total Posts:</b>
-                        <p>{user.posts.meta?.totalCount ? user.posts.meta.totalCount : 0 }</p>
-                      
-                        {/* <Button variant="destructive"><TrashIcon /></Button>
-                        <Button variant="secondary"><Pencil2Icon /></Button> */}
-                    </CardFooter>
+                    
                 </Card>
             </Link>
         ))}

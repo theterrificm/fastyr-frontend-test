@@ -15,8 +15,8 @@ import {
 
 const NavMenu = () => {
   return (
-    <div className="container mx-auto gap-4 bg-transparent p-4 flex justify-center shadow-sm">
-        <NavigationMenu >
+    <div className="md:flex container mx-auto gap-4 bg-transparent p-4 flex justify-center shadow-sm">
+        <NavigationMenu  >
             <NavigationMenuList>
                 <NavigationMenuItem>
                     <Link href="/" legacyBehavior passHref>
@@ -35,19 +35,31 @@ const NavMenu = () => {
                             Users
                         </NavigationMenuLink>
                         </Link>
-                        {/* <Link href="/create-users" legacyBehavior passHref>
-                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Create A User
-                        </NavigationMenuLink>
-                        </Link> */}
+                        
                     </NavigationMenuContent>
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
                     <NavigationMenuTrigger>Albums</NavigationMenuTrigger>
                         <NavigationMenuContent>
-                            <NavigationMenuLink className={navigationMenuTriggerStyle()} >Create Albums</NavigationMenuLink>
+                            <Link href="/albums" legacyBehavior passHref>
+                            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                                All Albums
+                            </NavigationMenuLink>
+                            </Link>
+                            <Link href="/albums/import" legacyBehavior passHref>
+                            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                                Import Albums
+                            </NavigationMenuLink>
+                            </Link>
                         </NavigationMenuContent>
+                        {/* <NavigationMenuContent>
+                            <Link href="/albums/import" legacyBehavior passHref>
+                            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                                Import Albums
+                            </NavigationMenuLink>
+                            </Link>
+                        </NavigationMenuContent> */}
                 </NavigationMenuItem>
             
             </NavigationMenuList>

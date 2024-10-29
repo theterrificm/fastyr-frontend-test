@@ -48,6 +48,11 @@ export const CREATE_USER_MUTATION = gql`
         }
     }
 `;
+export const DELETE_USER = gql`
+    mutation DeleteUser($id: ID!) {
+        deleteUser(id: $id) 
+    }
+`;
 
 export const GET_ALBUMS = gql`
     query GetAlbums($page: Int) {
