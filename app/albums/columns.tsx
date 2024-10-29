@@ -1,5 +1,6 @@
 "use client"
-import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { ArrowUpDown } from "lucide-react"
 import { ColumnDef } from "@tanstack/react-table"
 import { Checkbox } from "@/components/ui/checkbox"
 
@@ -19,13 +20,23 @@ export const columns: ColumnDef<AlbumsColumns>[] = [
     header: () => <Checkbox name="bulk" value={"bulkDelete"} />,
     cell: ({row}) => <Checkbox value={row.original.id} />,
   },
-  {
-    accessorKey: "id",
-    header: "Id",
-  },
+  // {
+  //   accessorKey: "id",
+  //   header: "Id",
+  // },
   {
     accessorKey: "title",
-    header: "Title",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Title
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
   },
   
 ]
